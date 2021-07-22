@@ -8,7 +8,6 @@ var isDrawing;
 var containerMain = new createjs.Container()
 var bottleBase, bottleCurr
 var winSt = true
-
 var map = [
     [3, 2, 4, 4],
     [-1, 4, 2, 2],
@@ -17,7 +16,6 @@ var map = [
     [-1, -1, -1, -1],
     [-1, 8, 8, 8]
 ]
-
 var containerBottleClone = [
     { newBottle: new createjs.Container(), oldBottle: new createjs.Container() },
     { newBottle: new createjs.Container(), oldBottle: new createjs.Container() },
@@ -169,7 +167,6 @@ function setAnimation() {
     addEvent();
 }
 function setBackground() {
-
     var bg = new createjs.Sprite(spriteSheet, "bg");
     bg.scaleX = stage.canvas.width / bg.getBounds().width;
     bg.scaleY = stage.canvas.height / bg.getBounds().height;
@@ -647,7 +644,7 @@ function reRenderMaskCEnd(bottleClone, index) {
     var heightItem = (maxHeight - heightEmpty) / (4 - num_1)
     var heightItemN = 0;
     if (oldsurvival == 0) getGameStatus()
-    
+
     for (let i = 0; i < arrnew.length; i++) {
         var nY = 0
         if (arrnew[i].color >= 0) {
@@ -881,7 +878,6 @@ function getMaskCClone(arrColor) {
     return maskC
 }
 function getNewMaskCClone(arrColor, bottleClone) {
-
     var corner = bottleClone.corner
     var oldsurvival = (bottleClone.bottle.rotation - corner.r0) / (corner.r1 - corner.r0);
     var survival = 1 - oldsurvival;
@@ -913,30 +909,29 @@ function getNewMaskCClone(arrColor, bottleClone) {
             }
         }
     } else {
-        for (let i = arrColor.length - 1; i >= 0; i--) {
+        for (let i = 0; i < arrColor.length; i++) {
             const color = convertColor(arrColor[i].color);
             var rect = new createjs.Shape();
-            var nY = 0
-            var heightItemN = 0
+            var NY = 0
             if (i == 0) {
-                heightItemN = i == arrColor.length - 1 ? heightBase * arrColor[i].numColor * oldsurvival + heightBase * 2 : heightBase * arrColor[i].numColor * oldsurvival
+                heightItemN = heightBase * arrColor[i].numColor * oldsurvival
                 rect.graphics.f(color).dr(0, 0, bottleBase.height * 1.5, heightItemN * 1.3);
-                rect.y = nY + heightBase * arrColor[i].numColor * survival;
+                rect.y = NY + heightBase * arrColor[i].numColor * survival;
                 maskC.addChild(rect);
-            } else if (i == arrColor.length - 1) {
-                nY = heightBase * (4 - arrColor[i].numColor)
-                rect.graphics.f(color).dr(0, 0, bottleBase.height * 1.5, heightBase * arrColor[i].numColor * 1.3 + heightBase * 2);
-                rect.y = nY;
+            } else if (i == 1) {
+                heightItemN = i == arrColor.length - 1 ? heightBase * arrColor[i].numColor + heightBase * 2 : heightBase * arrColor[i].numColor
+                rect.graphics.f(color).dr(0, 0, bottleBase.height * 1.5, heightItemN * 1.3);
+                rect.y = heightBase * arrColor[0].numColor;
                 maskC.addChild(rect);
             }
             else {
-                nY = maskC.children[maskC.children.length - 1].y - heightBase * arrColor[i].numColor
-                rect.graphics.f(color).dr(0, 0, bottleBase.height * 1.5, heightBase * arrColor[i].numColor * 1.3);
-                rect.y = nY;
+                heightItemN = i == arrColor.length - 1 ? heightBase * arrColor[i].numColor + heightBase * 2 : heightBase * arrColor[i].numColor
+                rect.graphics.f(color).dr(0, 0, bottleBase.height * 1.5, heightItemN * 1.3);
+                rect.y = maskC.children[maskC.children.length - 1].y + heightBase * arrColor[i - 1].numColor;
                 maskC.addChild(rect);
             }
-
         }
+
     }
     return maskC
 }
