@@ -158,7 +158,7 @@ function setAnimation() {
             "btn_install_now": { "frames": [27] },
             "btn_try_again": { "frames": [28] },
             "hand_tut": { "frames": [30] }
-        },
+        }
     });
     setBackground()
     setMap()
