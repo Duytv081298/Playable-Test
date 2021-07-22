@@ -271,7 +271,6 @@ function setMap(turn) {
         tutorialStatus = false
         tutorial3s = setInterval(function () {
             tutorialtime -= 1
-            console.log(tutorialtime);
             if (tutorialtime == 0) getTutorial3s()
         }, 1000);
     }
@@ -437,7 +436,6 @@ function upBottleChoose(newChoose) {
         tutorialStatus = false
         tutorial3s = setInterval(function () {
             tutorialtime -= 1
-            console.log(tutorialtime);
             if (tutorialtime == 0) getTutorial3s()
         }, 1000);
     }
@@ -621,10 +619,7 @@ function endMoveBottle(index) {
         }, 500, createjs.Ease.linear)
         .call(() => {
             reRenderMap(index)
-            setTimeout(function () {
-                checkWin(index)
-                getGameStatus()
-            }, 1000);
+            checkWin(index)
             bottleClone.bottle.rotation = 0
             listBottle[oldChoose].status = true
             listBottle[newChoose].proAdd = true
@@ -640,6 +635,7 @@ function degrees_to_radians(degrees) {
     return degrees * (pi / 180);
 }
 function reRenderMaskCEnd(bottleClone, index) {
+
     var corner = bottleClone.corner
     var oldsurvival = bottleClone.bottle.rotation / corner.r1;
     var survival = 1 - oldsurvival;
@@ -650,6 +646,8 @@ function reRenderMaskCEnd(bottleClone, index) {
     var heightEmpty = (maxHeight / 4) * num_1 * survival
     var heightItem = (maxHeight - heightEmpty) / (4 - num_1)
     var heightItemN = 0;
+    if (oldsurvival == 0) getGameStatus()
+    
     for (let i = 0; i < arrnew.length; i++) {
         var nY = 0
         if (arrnew[i].color >= 0) {
@@ -1065,14 +1063,18 @@ function getGameStatus() {
         if (bottle.pass == true) win++
     }
     if (win == 6 && winSt) {
-        gameWin()
-        return true
+        winSt = false
+        removeEvent()
+        setTimeout(function () {
+            gameWin()
+        }, 1500);
     }
-    else return false
 }
 function gameWin() {
-    winSt = false
     removeEvent()
+    clearTutorial()
+    clearInterval(tutorial);
+    clearInterval(tutorial3s);
     stage.removeChild(install_now);
     var particle = new createjs.Shape();
     particle.graphics.f("#000000").dr(0, 0, stage.canvas.width, stage.canvas.height);
@@ -1378,12 +1380,10 @@ function getTutorial3s() {
             }
         }
     }
-    console.log({ bottle1: bottle1, bottle2: bottle2 });
     tutorialStatus = true
     renderHand(bottle1, bottle2)
     tutorial = setInterval(function () {
         clearTutorial()
         renderHand(bottle1, bottle2)
     }, 3000);
-
 }
