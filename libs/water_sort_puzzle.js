@@ -117,9 +117,9 @@ function setAnimation() {
             [576, 1, 255, 254, 0, 0, 0],
             [833, 1, 251, 304, 0, -191, -10],
             [1086, 1, 224, 330, 0, -191, -29],
-            [1312, 1, 157, 288, 0, -237, -144],
             [273, 260, 245, 264, 0, -243, 0],
             [243, 526, 224, 275, 0, -253, -1],
+            [1312, 1, 157, 288, 0, -237, -144],
             [1, 803, 220, 202, 0, -206, -174],
             [223, 803, 249, 169, 0, 0, 0],
             [469, 526, 169, 275, 0, -231, -4],
@@ -134,30 +134,30 @@ function setAnimation() {
             [681, 644, 188, 315, 0, -215, -92],
             [871, 644, 43, 221, 0, -294, -264],
             [916, 644, 41, 184, 0, -294, -328],
+            [959, 818, 200, 54, 0, 0, 0],
             [681, 961, 200, 44, 0, 0, 0],
             [640, 607, 38, 145, 0, -294, -394],
-            [959, 818, 150, 64, 0, 0, 0],
-            [871, 884, 296, 55, 0, -1, -2],
-            [883, 941, 143, 57, 0, 0, 0],
-            [1028, 941, 143, 57, 0, 0, 0],
             [1386, 625, 35, 104, 0, -294, -462],
-            [1111, 818, 45, 53, 0, -5, -1],
-            [1386, 731, 32, 62, 0, -294, -531]
+            [871, 874, 150, 64, 0, 0, 0],
+            [1023, 874, 143, 57, 0, 0, 0],
+            [883, 940, 143, 57, 0, 0, 0],
+            [1386, 731, 32, 62, 0, -294, -531],
+            [1028, 933, 45, 53, 0, -5, -1]
         ],
         
         "animations": {
             "bg": { "frames": [0] },
-            "confetti": { "frames": [31, 29, 24, 22, 21, 13, 6, 20, 15, 5, 1, 4, 17, 8, 7, 11, 19, 12, 9, 18, 16] },
+            "confetti": { "frames": [30, 26, 25, 22, 21, 13, 8, 20, 15, 5, 1, 4, 17, 7, 6, 11, 19, 12, 9, 18, 16] },
             "decor": { "frames": [2] },
             "circle_decor": { "frames": [3] },
             "cup": { "frames": [10] },
             "bottle": { "frames": [14] },
-            "txt_wesome": { "frames": [23] },
-            "btn_next": { "frames": [25] },
-            "text": { "frames": [26] },
-            "btn_install_now": { "frames": [27] },
-            "btn_try_again": { "frames": [28] },
-            "hand_tut": { "frames": [30] }
+            "text": { "frames": [23] },
+            "txt_wesome": { "frames": [24] },
+            "btn_next": { "frames": [27] },
+            "btn_install_now": { "frames": [28] },
+            "btn_try_again": { "frames": [29] },
+            "hand_tut": { "frames": [31] }
         },
     });
     setBackground()
@@ -171,9 +171,9 @@ function setBackground() {
 
 
     var textTop = new createjs.Sprite(spriteSheet, "text");
-    textTop.scale = (stage.canvas.width * 2 / 3) / textTop.getBounds().width;
+    textTop.scale = (stage.canvas.width * 1.7 / 3) / textTop.getBounds().width;
     textTop.y = stage.canvas.height / 12
-    textTop.x = (stage.canvas.width - stage.canvas.width * 2 / 3) / 2
+    textTop.x = (stage.canvas.width - textTop.scale * textTop.getBounds().width) / 2
     var bottle = new createjs.Sprite(spriteSheet, "bottle");
     bottle.scale = (stage.canvas.width / 9) / bottle.getBounds().width
     bottle.regX = bottle.getBounds().width * 0.93
