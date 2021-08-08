@@ -1255,9 +1255,8 @@ function renderAnime() {
     var imageObject = document.createElement("IMG");
     imageObject.setAttribute('src', anime1);
     anime = new createjs.Bitmap(imageObject);
-    anime.scale = stage.canvas.width / imageObject.width
+    anime.scale = stage.canvas.width / 1080
     stage.addChild(anime)
-    console.log(anime.getBounds().width);
 }
 function removeAnime() {
     createjs.Tween.get(anime)
