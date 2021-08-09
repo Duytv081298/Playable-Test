@@ -169,7 +169,7 @@ function setAnimation() {
     setBackground()
     setMap()
     addEvent();
-    // renderAnime()
+    renderAnime()
 
 }
 function setBackground() {
